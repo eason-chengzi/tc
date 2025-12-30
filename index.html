@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统维护中 | System Maintenance</title>
+    
+    <!-- 核心依赖：Tailwind CSS + Google Fonts + Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        /* 保持与主站一致的样式配置 */
+        body { 
+            font-family: 'Noto Sans SC', sans-serif; 
+            @apply bg-[#0f1115] text-[#e5e7eb] min-h-screen flex items-center justify-center p-4;
+            /* 背景光晕效果 */
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(236, 72, 153, 0.1) 0px, transparent 50%), 
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        .font-cute { font-family: 'Fredoka', sans-serif; }
+        
+        /* 面板样式 */
+        .panel { 
+            @apply bg-[#18181b] border border-[#27272a] rounded-2xl shadow-2xl;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 呼吸动画 */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        .animate-breathe { animation: breathe 3s infinite ease-in-out; }
+
+        /* 进度条动画 */
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 95%; }
+        }
+        .animate-progress { animation: progress 2s ease-out forwards; }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-lg w-full">
+        <!-- 主卡片 -->
+        <div class="panel p-8 md:p-12 relative overflow-hidden text-center">
+            
+            <!-- 顶部装饰光效 -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500"></div>
+
+            <!-- 图标区域 -->
+            <div class="mb-8 relative inline-block">
+                <!-- 背景光圈 -->
+                <div class="absolute inset-0 bg-pink-500/20 blur-xl rounded-full"></div>
+                <!-- 图标：TrafficCone, Wrench, 或 Sakura -->
+                <i class="ph-fill ph-traffic-cone text-pink-500 text-6xl relative z-10 animate-breathe"></i>
+            </div>
+
+            <!-- 标题区域 -->
+            <h1 class="text-3xl font-bold font-cute text-white mb-4">系统维护中</h1>
+            <p class="text-gray-400 text-sm mb-8 leading-relaxed">
+                为了提供更优质的服务，我们正在对站点进行例行维护和升级。<br>
+                请稍后再次访问，感谢您的耐心等待。
+            </p>
+
+            <!-- 进度条装饰 -->
+            <div class="w-full bg-gray-800 rounded-full h-1.5 mb-8 overflow-hidden">
+                <div class="bg-gradient-to-r from-pink-500 to-purple-500 h-1.5 rounded-full animate-progress" style="width: 80%"></div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- START: 维护内容详情 (可编辑区域) -->
+            <!-- 
+                【如何自定义图标】：
+                1. 访问图标库：https://phosphoricons.com/
+                2. 搜索您想要的图标（英文），例如 'plus', 'star', 'fire'
+                3. 将下方 li 标签中的 ph-check 替换为您找到的名字，例如 ph-star
+            -->
+            <!-- ============================================================== -->
+            <div class="bg-black/20 rounded-xl p-6 text-left border border-white/5 mb-8">
+                <h3 class="text-xs font-bold text-gray-500 uppercase mb-3 flex items-center gap-2">
+                    <i class="ph-fill ph-clipboard-text"></i> 
+                    本次更新内容 / Maintenance Log
+                </h3>
+                <ul class="space-y-3 text-sm text-gray-300">
+                    
+                    <!-- 条目 1：使用了 ph-check (对勾) -->
+                    <li class="flex items-start gap-2">
+                        <i class="ph-bold ph-check text-green-500 mt-0.5"></i>
+                        <span>网盘与对象存储资源存储重构</span>
+                    </li>
+                    
+                    <!-- 条目 2：您可以将 ph-check 改为 ph-wrench (扳手) 表示修复 -->
+                    <li class="flex items-start gap-2">
+                        <i class="ph-bold ph-check text-green-500 mt-0.5"></i>
+                        <span>将as.mr人工汉化资源引入</span>
+                    </li>
+
+                    <!-- 条目 3：您可以将 ph-circles-three-plus 改为 ph-fire (火焰) 表示热门/上新 -->
+                    <li class="flex items-start gap-2">
+                        <i class="ph-bold ph-check text-green-500 mt-0.5"></i>
+                        <span>上传汉化好的后两部ysmr</span>
+                    </li>
+
+                    <!-- 条目 4 (预计恢复时间)：使用了 ph-clock (时钟) -->
+                    <li class="flex items-start gap-2 pt-2 border-t border-white/10 mt-2">
+                        <i class="ph-bold ph-clock text-pink-500 mt-0.5"></i>
+                        <span class="text-pink-400 font-bold">预计恢复时间（延期）：2025-12-31 20:00 (UTC+8)</span>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- ============================================================== -->
+            <!-- END: 维护内容详情 -->
+            <!-- ============================================================== -->
+
+            <!-- 底部按钮 -->
+            <div class="flex gap-3 justify-center">
+                <button onclick="location.reload()" class="bg-pink-600 hover:bg-pink-500 text-white px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2 shadow-lg shadow-pink-900/20">
+                    <i class="ph-bold ph-arrows-clockwise"></i> 刷新页面
+                </button>
+                <!-- QQ 联系按钮 -->
+                <a href="https://qm.qq.com/q/lji6lSzMm4" target="_blank" class="border border-gray-600 hover:bg-gray-800 text-gray-300 px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2 group">
+                    <!-- 使用了通用的聊天气泡图标来代表 QQ -->
+                    <i class="ph-bold ph-chat-circle-dots group-hover:text-blue-400 transition-colors"></i> 
+                    联系管理
+                </a>
+            </div>
+
+        </div>
+
+        <!-- 底部版权 -->
+        <div class="text-center mt-6 text-xs text-gray-600 font-mono">
+            &copy; Yuzusoft Resource Site. All rights reserved.
+        </div>
+    </div>
+
+</body>
+</html>
