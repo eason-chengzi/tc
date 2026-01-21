@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在原七海想和哥哥合为一体 - More About Yuzusoft</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { dark: { bg: '#0f1115', panel: '#18181b', border: '#27272a' } } } }
+        }
+    </script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://unpkg.com/artalk/dist/Artalk.css" rel="stylesheet">
+    <script src="https://unpkg.com/artalk/dist/Artalk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .font-cute { font-family: 'Fredoka', sans-serif; }
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { @apply bg-white dark:bg-[#18181b]; }
+            ::-webkit-scrollbar-thumb { @apply bg-pink-200 dark:bg-[#3f3f46] rounded-full; }
+            ::-webkit-scrollbar-thumb:hover { @apply bg-pink-300 dark:bg-pink-500; }
+            .glass-nav { @apply bg-white/90 dark:bg-[#0f1115]/95 backdrop-blur-md border-b border-pink-100 dark:border-white/5; }
+            .panel { @apply bg-white dark:bg-[#18181b] border border-pink-100 dark:border-[#27272a]; }
+            .panel-hover:hover { @apply border-pink-300 dark:border-[#3f3f46]; }
+            em { @apply text-pink-500 not-italic font-bold; }
+            .prose-dark { @apply text-gray-300 leading-relaxed space-y-4; }
+            .prose-dark h1, .prose-dark h2, .prose-dark h3 { @apply text-white font-bold mt-6 mb-3; }
+            .prose-dark h1 { @apply text-2xl; }
+            .prose-dark h2 { @apply text-xl border-b border-gray-700 pb-2; }
+            .prose-dark h3 { @apply text-lg; }
+            .prose-dark p { @apply mb-4; }
+            .prose-dark ul { @apply list-disc list-inside space-y-1 ml-2 text-gray-400; }
+            .prose-dark ol { @apply list-decimal list-inside space-y-1 ml-2 text-gray-400; }
+            .prose-dark a { @apply text-blue-400 hover:text-blue-300 underline; }
+            .prose-dark blockquote { @apply border-l-4 border-pink-500 pl-4 italic text-gray-500; }
+            .prose-dark code { @apply bg-black/30 px-1.5 py-0.5 rounded text-pink-400 font-mono text-sm; }
+            .prose-dark pre { @apply bg-[#0f1115] p-4 rounded-lg overflow-x-auto border border-gray-800 text-sm; }
+            .prose-dark img { @apply rounded-lg shadow-lg max-w-full h-auto my-4 border border-gray-800; }
+            .prose-dark table { @apply w-full text-sm text-left text-gray-400 border-collapse my-4; }
+            .prose-dark th { @apply py-2 px-4 bg-gray-800 text-white font-bold border border-gray-700; }
+            .prose-dark td { @apply py-2 px-4 border border-gray-700; }
+        }
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            @apply bg-pink-50 dark:bg-[#0f1115] text-gray-700 dark:text-[#e5e7eb] transition-colors duration-300;
+            background-image: radial-gradient(at 0% 0%, rgba(236, 72, 153, 0.05) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        .tag-blue { @apply bg-blue-50 text-blue-500 border-blue-100 dark:bg-blue-500/15 dark:text-blue-400 dark:border-blue-500/20 border; }
+        .tag-green { @apply bg-green-50 text-green-500 border-green-100 dark:bg-green-500/15 dark:text-green-400 dark:border-green-500/20 border; }
+        .tag-pink { @apply bg-pink-50 text-pink-500 border-pink-100 dark:bg-pink-500/15 dark:text-pink-400 dark:border-pink-500/20 border; }
+        .tag-purple { @apply bg-purple-50 text-purple-500 border-purple-100 dark:bg-purple-500/15 dark:text-purple-400 dark:border-purple-500/20 border; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes expandDown { from { max-height: 0; opacity: 0; } to { max-height: 200px; opacity: 1; } }
+        .animate-expand { animation: expandDown 0.3s ease-out forwards; overflow: hidden; }
+        @keyframes slideUpFade { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+        .toast-enter { animation: slideUpFade 0.3s ease-out forwards; }
+        .dark .artalk { --at-color-font: #e5e7eb; --at-color-meta: #9ca3af; --at-color-border: #27272a; --at-color-bg: #18181b; }
+    </style>
+
+                    <meta name="description" content="## 故事简介 在守护了宝贵的日常之后——。 迎来的是与既是可爱的妹妹，同时也是恋人的在原七海的甜蜜幸福生活。 除了治愈的掏耳和陪睡之外，色色的内容也有很多！ 尽情享受与七海度过的甜蜜日常吧。  敬请享受和欧丽叶的甜蜜时光吧 > 图片直接引用DLsite的了，若被GFW封锁请使用梯子  [![故事简...">
+                    <meta property="og:title" content="在原七海想和哥哥合为一体 - More About Yuzusoft">
+                    <meta property="og:description" content="## 故事简介 在守护了宝贵的日常之后——。 迎来的是与既是可爱的妹妹，同时也是恋人的在原七海的甜蜜幸福生活。 除了治愈的掏耳和陪睡之外，色色的内容也有很多！ 尽情享受与七海度过的甜蜜日常吧。  敬请享受和欧丽叶的甜蜜时光吧 > 图片直接引用DLsite的了，若被GFW封锁请使用梯子  [![故事简...">
+                    <meta property="og:type" content="website">
+                    <meta property="og:image" content="https://072101.xyz/%E5%9C%A8%E5%8E%9F%E4%B8%83%E6%B5%B7%E9%9F%B3%E5%A3%B0%E5%B0%81%E9%9D%A2.jpg">
+                    <link rel="icon" href="https://072101.xyz/favicon.png">
+                </head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useMemo, useRef } = React;
+        const B64_DB = "${b64DB}";
+        
+        const fromBase64 = (str) => { try { return decodeURIComponent(escape(window.atob(str))); } catch (e) { console.error(e); return null; } };
+        const DB = JSON.parse(fromBase64(B64_DB)) || {};
+        
+        const SITE_CONFIG = DB.config || {};
+        const MOCK_DATA = DB.resources || [];
+        const ARTICLES = DB.articles || [];
+        const TODOS = DB.todos || [];
+
+        const Markdown = ({ content, className = "prose-dark" }) => {
+            const html = marked.parse(content || "");
+            return <div className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+        };
+
+        const Icon = ({ name, size = 20, className = "", weight="regular" }) => <i className={"ph ph-" + name + " " + className} style={{ fontSize: size, fontWeight: weight === 'bold' ? 700 : 400 }}></i>;
+        const Toast = ({ message, onClose }) => {
+            useEffect(() => { const timer = setTimeout(onClose, 2500); return () => clearTimeout(timer); }, [onClose]);
+            return <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white dark:bg-white dark:text-gray-900 px-6 py-3 rounded-full shadow-lg z-[100] flex items-center gap-2 text-sm font-bold toast-enter border border-white/10 dark:border-black/5"><Icon name="check-circle" weight="fill" className="text-green-500" />{message}</div>;
+        };
+
+        const Navbar = ({ activeTab, onChangeTab, filterMode, setFilterMode, theme, toggleTheme }) => {
+            const [isFilterOpen, setIsFilterOpen] = useState(false);
+            const filterOptions = [{ id: 'sfw', label: '仅显示SFW', icon: 'shield-check', color: 'text-green-500' }, { id: 'nsfw', label: '仅显示NSFW', icon: 'warning', color: 'text-red-500' }, { id: 'both', label: '全部显示', icon: 'circles-three-plus', color: 'text-blue-500' }];
+            return (
+                <nav className="fixed top-0 left-0 right-0 z-50 glass-nav h-16 px-4 md:px-8 flex items-center justify-between transition-all">
+                    <div className="flex items-center gap-3 cursor-pointer group" onClick={() => onChangeTab('home')}>
+                        {SITE_CONFIG.favicon ? 
+                            <img src={SITE_CONFIG.favicon} className="w-8 h-8 rounded-lg shadow-lg group-hover:scale-110 transition-transform object-cover" /> :
+                            <div className="bg-pink-500 dark:bg-pink-600 text-white p-1.5 rounded-lg shadow-lg dark:shadow-[0_0_15px_rgba(236,72,153,0.5)] group-hover:scale-110 transition-transform"><Icon name="sakura" size={24} weight="fill" /></div>
+                        }
+                        <h1 className="text-xl font-bold font-cute text-gray-800 dark:text-white tracking-wide transition-colors">{SITE_CONFIG.siteName.split(' Yuzusoft')[0]} <span className="text-pink-500">Yuzusoft</span></h1>
+                    </div>
+                    <div className="hidden md:flex gap-2">
+                        {['home', 'voice', 'bonus'].map(id => (<button key={id} onClick={() => onChangeTab(id)} className={"px-4 py-2 rounded-lg text-sm font-medium transition-all " + (activeTab === id ? 'bg-pink-50 text-pink-500 dark:bg-zinc-800 dark:text-pink-400 font-bold' : 'text-gray-500 dark:text-gray-400 hover:text-pink-500 dark:hover:text-white hover:bg-pink-50 dark:hover:bg-zinc-800')}>{id === 'home' ? '首页' : id === 'voice' ? '音声资源' : '正作周边资源'}</button>))}
+                        <button onClick={() => onChangeTab('about')} className={"px-4 py-2 rounded-lg text-sm font-medium transition-all " + (activeTab === 'about' ? 'bg-pink-50 text-pink-500 dark:bg-zinc-800 dark:text-pink-400 font-bold' : 'text-gray-500 dark:text-gray-400 hover:text-pink-500 dark:hover:text-white hover:bg-pink-50 dark:hover:bg-zinc-800')}>关于本站</button>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <button onClick={toggleTheme} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"><Icon name={theme === 'dark' ? "sun" : "moon"} weight="fill" size={18} /></button>
+                        <div className="relative">
+                            <button onClick={() => setIsFilterOpen(!isFilterOpen)} className="flex items-center gap-2 bg-gray-100 dark:bg-zinc-800 border border-transparent dark:border-zinc-700 text-gray-600 dark:text-gray-300 px-3 py-1.5 rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-xs font-bold"><Icon name="gear" size={16} weight="fill" /> {filterMode === 'nsfw' ? 'NSFW' : filterMode === 'sfw' ? 'SFW' : 'ALL'}</button>
+                            {isFilterOpen && (
+                                <>
+                                    <div className="fixed inset-0 z-40" onClick={() => setIsFilterOpen(false)}></div>
+                                    <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-zinc-800 rounded-xl shadow-2xl border border-pink-100 dark:border-zinc-700 z-50 overflow-hidden animate-fade-in text-gray-700 dark:text-gray-200">
+                                        <div className="bg-gray-50 dark:bg-zinc-900/50 px-4 py-2 text-[10px] font-bold text-gray-500 uppercase">显示设置</div>
+                                        {filterOptions.map((opt) => (<button key={opt.id} onClick={() => { setFilterMode(opt.id); setIsFilterOpen(false); }} className={"w-full text-left px-4 py-3 text-xs flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors " + (filterMode === opt.id ? 'bg-pink-50 dark:bg-zinc-700/50 font-bold' : 'text-gray-500 dark:text-gray-400')}><Icon name={opt.icon} className={opt.color} weight="fill" size={16} /><span className="flex-1">{opt.label}</span></button>))}
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        const ItemCard = ({ item, filterMode, onClick }) => {
+            const isNSFW = item.type === 'nsfw';
+            const pageKey = '/' + item.slug;
+            return (
+                <div onClick={onClick} className="group panel rounded-xl overflow-hidden cursor-pointer hover:border-pink-300 dark:hover:border-pink-500/50 transition-all duration-300 flex flex-col h-full hover:shadow-xl hover:-translate-y-1">
+                    <div className="relative aspect-video overflow-hidden bg-gray-200 dark:bg-gray-900">
+                        <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <div className="absolute top-2 left-2 flex gap-1"><span className={"text-[10px] font-bold px-2 py-0.5 rounded shadow-sm " + (isNSFW ? 'bg-red-500 text-white' : 'bg-green-500 text-white')}>{isNSFW ? 'NSFW' : 'SFW'}</span></div>
+                    </div>
+                    <div className="p-4 flex flex-col flex-grow">
+                        <h3 className="text-gray-800 dark:text-gray-100 font-bold text-sm leading-snug mb-3 line-clamp-2 group-hover:text-pink-500 dark:group-hover:text-pink-400 transition-colors">{item.title}</h3>
+                        <div className="mt-auto flex items-center justify-between">
+                            <div className="flex gap-1.5 flex-wrap">{item.tags.map((tag, idx) => <span key={idx} className="text-[10px] text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded border border-gray-200 dark:border-zinc-700">#{tag}</span>)}</div>
+                        </div>
+                         <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-100 dark:border-zinc-700 text-[10px] text-gray-400 dark:text-gray-500">
+                            <span className="flex items-center gap-1"><Icon name="eye" size={12}/><span data-page-key={pageKey} className="artalk-pv-count">--</span></span>
+                            <span className="flex items-center gap-1"><Icon name="chat-circle" size={12}/><span data-page-key={pageKey} className="artalk-comment-count">--</span></span>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const ResourceItem = ({ res }) => {
+            const [isExpanded, setIsExpanded] = useState(false);
+            return (
+                <div className="panel p-5 rounded-xl flex flex-col gap-4 relative group hover:border-pink-300 dark:hover:border-zinc-600 transition-colors">
+                    <div className="flex flex-col md:flex-row gap-5 items-start">
+                        <div className="hidden md:flex flex-col items-center gap-2 w-16 pt-1">
+                            {res.uploaderAvatar ? <img src={res.uploaderAvatar} className="w-10 h-10 rounded-full border border-gray-600 object-cover" /> : <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold shadow-lg">{res.uploader[0]}</div>}
+                            <span className="text-[10px] text-gray-500 truncate w-full text-center">{res.uploader}</span>
+                        </div>
+                        <div className="flex-1 w-full">
+                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                                <span className="tag-blue px-2 py-0.5 rounded text-[10px] font-bold">{res.type}</span>
+                                {res.language && <span className="tag-green px-2 py-0.5 rounded text-[10px] font-bold">{res.language}</span>}
+                                {res.tags.map(t => <span key={t} className="bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-gray-400 px-2 py-0.5 rounded text-[10px]">{t}</span>)}
+                                <span className="ml-auto text-xs text-gray-400 dark:text-gray-500 hidden md:block">更新于 {res.date}</span>
+                            </div>
+                            <h3 className="text-gray-800 dark:text-white font-bold text-base mb-2 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">{res.title}</h3>
+                            <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1"><p>资源备注: <span className="text-gray-600 dark:text-gray-500">{res.note}</span></p></div>
+                            <div className="md:hidden text-[10px] text-gray-400 mt-2 border-t border-gray-100 dark:border-zinc-800 pt-2 flex justify-between"><span>{res.uploader}</span><span>{res.date}</span></div>
+                        </div>
+                        <div className="w-full md:w-auto flex flex-row md:flex-col justify-end gap-2 md:items-end md:pl-4 md:border-l border-gray-100 dark:border-zinc-800 border-t md:border-t-0 pt-3 md:pt-0 mt-2 md:mt-0">
+                            <button onClick={() => setIsExpanded(!isExpanded)} className={"h-9 px-4 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-lg w-full md:w-auto transition-all " + (isExpanded ? 'bg-gray-200 text-gray-600 dark:bg-zinc-700 dark:text-white' : 'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-500/20 dark:bg-blue-600 dark:hover:bg-blue-500 dark:shadow-blue-900/20')}>
+                                <Icon name={isExpanded ? "caret-up" : "download-simple"} weight="bold" size={16} />{isExpanded ? "收起" : "下载"}
+                            </button>
+                        </div>
+                    </div>
+                    {isExpanded && (
+                        <div className="animate-expand border-t border-gray-100 dark:border-zinc-800 pt-4 mt-1">
+                            <div className="flex items-center gap-3 mb-3">
+                                <span className="bg-purple-100 text-purple-600 dark:bg-[#5b21b6] dark:text-white px-3 py-1 rounded-full text-xs font-bold">{res.source || '云盘下载'}</span>
+                                <span className="bg-gray-100 text-gray-600 border border-gray-200 dark:bg-[#27272a] dark:text-gray-300 dark:border-zinc-700 px-3 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1"><Icon name="hard-drives" weight="fill" /> {res.size}</span>
+                            </div>
+                            <p className="text-xs text-gray-500 mb-2">下载说明 / 链接</p>
+                            <div className="text-sm text-blue-400 break-all whitespace-pre-wrap">
+                                <Markdown content={res.link} className="prose-dark text-xs [&>p]:mb-1 [&>p:last-child]:mb-0 prose-a:text-blue-400 prose-a:font-bold prose-a:no-underline hover:prose-a:underline" />
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const DetailPage = ({ item, onBack, filterMode, onShowToast }) => {
+            const isNSFW = item.type === 'nsfw';
+            const [activeTab, setActiveTab] = useState('resources');
+            const [showFullImage, setShowFullImage] = useState(false);
+            const artalkRef = useRef(null);
+            const pageKey = '/' + item.slug;
+
+            // 动态修改标题和注入 JSON-LD
+            useEffect(() => {
+                document.title = item.title + " - " + SITE_CONFIG.siteName;
+                
+                // SEO: JSON-LD Structure Data
+                const script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.text = JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Game",
+                    "name": item.title,
+                    "image": item.image,
+                    "description": item.description ? item.description.substring(0, 150) : "",
+                    "datePublished": item.date,
+                    "author": { "@type": "Person", "name": item.uploader }
+                });
+                document.head.appendChild(script);
+                return () => { 
+                    document.title = SITE_CONFIG.siteName;
+                    document.head.removeChild(script); 
+                };
+            }, [item]);
+
+            useEffect(() => {
+                artalkRef.current = Artalk.init({ el: '#artalk-comments', pageKey: pageKey, pageTitle: item.title, server: SITE_CONFIG.artalkServer, site: SITE_CONFIG.artalkSiteName, darkMode: document.documentElement.classList.contains('dark') });
+                return () => { if (artalkRef.current) { artalkRef.current.destroy(); } };
+            }, [item.id, item.title, pageKey]);
+
+            useEffect(() => { const isDark = document.documentElement.classList.contains('dark'); if (artalkRef.current) { artalkRef.current.setDarkMode(isDark); } }, []);
+            const handleShare = () => { navigator.clipboard.writeText(window.location.href); onShowToast("链接已复制到剪贴板"); };
+
+            return (
+                <div className="animate-fade-in pb-12 max-w-6xl mx-auto pt-4 px-2 md:px-0">
+                    {showFullImage && (
+                        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in cursor-zoom-out" onClick={() => setShowFullImage(false)}>
+                            <button onClick={() => setShowFullImage(false)} className="absolute top-6 right-6 text-white/50 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-all backdrop-blur-md z-[101]">
+                                <Icon name="x" size={32} weight="bold" />
+                            </button>
+                            <img src={item.image} className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-white/10" onClick={(e) => e.stopPropagation()} />
+                        </div>
+                    )}
+                    <div className="flex items-center gap-2 text-xs text-gray-400 mb-6">
+                        <span className="cursor-pointer hover:text-gray-800 dark:hover:text-white transition-colors" onClick={onBack}>主页</span><Icon name="caret-right" size={12} />
+                        <span className="cursor-pointer hover:text-gray-800 dark:hover:text-white transition-colors" onClick={onBack}>{item.category === 'voice' ? '音声资源' : '正作周边资源'}</span><Icon name="caret-right" size={12} />
+                        <span className="text-gray-600 dark:text-gray-300 truncate max-w-[200px]">{item.title}</span>
+                    </div>
+                    <div className="panel rounded-2xl p-6 flex flex-col md:flex-row gap-8 mb-8 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/50 dark:from-zinc-800/50 to-transparent pointer-events-none"></div>
+                        <div className="relative z-10 w-full md:w-64 flex-shrink-0 group">
+                             <div onClick={() => setShowFullImage(true)} className="rounded-lg overflow-hidden border border-gray-200 dark:border-zinc-700 shadow-xl bg-gray-100 dark:bg-zinc-900 relative cursor-zoom-in group-hover:shadow-2xl hover:ring-2 hover:ring-pink-500/50 transition-all">
+                                <img src={item.image} className="w-full h-auto block" />
+                                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <Icon name="magnifying-glass-plus" className="text-white drop-shadow-md" size={32} weight="bold" />
+                                </div>
+                             </div>
+                        </div>
+                        <div className="relative z-10 flex-1 flex flex-col">
+                            <div className="flex items-start justify-between mb-2">
+                                <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white leading-tight mr-4">{item.title}</h1>
+                                <span className={"text-[10px] font-bold px-2 py-0.5 rounded shadow-sm " + (isNSFW ? 'bg-red-500 text-white' : 'bg-green-500 text-white')}>{isNSFW ? 'NSFW' : 'SFW'}</span>
+                            </div>
+                            <div className="mb-4"></div>
+                            <div className="flex flex-wrap gap-2 mb-6">
+                                {item.platformTags.map(tag => <span key={tag} className="tag-blue px-3 py-1 rounded-full text-xs font-bold">{tag}</span>)}
+                                {item.language && <span className="tag-purple px-3 py-1 rounded-full text-xs font-bold">{item.language}</span>}
+                                {item.specialTags && item.specialTags.map(tag => <span key={tag} className="tag-pink px-3 py-1 rounded-full text-xs font-bold">{tag}</span>)}
+                            </div>
+                            <div className="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400 mb-auto">
+                                <div className="flex items-center gap-2">
+                                    {item.uploaderAvatar ? <img src={item.uploaderAvatar} className="w-5 h-5 rounded-full border border-gray-600 object-cover" /> : <div className="w-5 h-5 rounded-full bg-gray-200 dark:bg-zinc-700 flex items-center justify-center text-gray-600 dark:text-white font-bold text-[10px]">{item.uploader[0]}</div>}
+                                    <span className="text-gray-700 dark:text-gray-300 font-bold hover:underline cursor-pointer">{item.uploader}</span>
+                                    <span className="text-gray-400 dark:text-gray-600">• {item.date}</span>
+                                </div>
+                                <div className="flex items-center gap-1"><Icon name="eye" size={14}/><span data-page-key={pageKey} className="artalk-pv-count">...</span></div>
+                                <div className="flex items-center gap-1"><Icon name="chat-circle" size={14}/><span data-page-key={pageKey} className="artalk-comment-count">...</span></div>
+                            </div>
+                            <div className="flex gap-3 mt-6 pt-6 border-t border-gray-100 dark:border-zinc-800">
+                                <button onClick={() => { setActiveTab('resources'); setTimeout(() => { document.getElementById('detail-tabs-nav')?.scrollIntoView({ behavior: 'smooth' }); }, 0); }} className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 py-2 rounded-lg text-sm font-bold flex items-center gap-2 shadow-lg shadow-blue-500/20 dark:shadow-blue-900/20 transition-all"><Icon name="download-simple" weight="bold" /> 下载资源</button>
+                                <button onClick={handleShare} className="bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-gray-600 dark:text-gray-300 px-3 py-2 rounded-lg text-sm border border-gray-200 dark:border-zinc-700 transition-all"><Icon name="share-network" weight="bold" /></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="detail-tabs-nav" className="flex items-center gap-1 mb-6 border-b border-gray-200 dark:border-zinc-800 scroll-mt-24">
+                        {[{ id: 'info', label: '游戏信息' }, { id: 'resources', label: '资源链接' }, { id: 'discussion', label: '讨论板' }].map(tab => (
+                            <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={"px-6 py-3 text-sm font-bold border-b-2 transition-colors " + (activeTab === tab.id ? 'border-pink-500 text-pink-600 dark:text-white' : 'border-transparent text-gray-500 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300')}>{tab.label}</button>
+                        ))}
+                    </div>
+                    {activeTab === 'resources' && (
+                        <div className="animate-fade-in space-y-6">
+                            <div className="bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 rounded-lg p-4 text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                                <p className="mb-1 text-gray-700 dark:text-gray-300 font-bold">注意事项：</p>
+                                <p className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: SITE_CONFIG.globalDisclaimer || "本站 Galgame 下载资源和补丁均来自互联网或用户上传，请自行鉴别资源安全性。" }}></p>
+                            </div>
+                            <div className="space-y-4">{item.resources.map((res, idx) => <ResourceItem key={idx} res={res} />)}</div>
+                        </div>
+                    )}
+                    {activeTab === 'info' && (
+                        <div className="animate-fade-in panel p-6 rounded-xl">
+                            <h3 className="text-gray-800 dark:text-white font-bold mb-4 border-b border-gray-100 dark:border-zinc-800 pb-2">游戏/资源简介</h3>
+                            <Markdown content={item.description} />
+                            <h3 className="text-gray-800 dark:text-white font-bold mb-4 border-b border-gray-100 dark:border-zinc-800 pb-2 mt-8">详细信息</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                {item.gameInfo.map((info, idx) => (
+                                    <div key={idx} className="flex justify-between p-3 bg-gray-50 dark:bg-zinc-900 rounded border border-gray-200 dark:border-zinc-800">
+                                        <span className="text-gray-500">{info.label}</span>
+                                        <span className="text-gray-800 dark:text-gray-200">{info.value}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    <div style={{ display: activeTab === 'discussion' ? 'block' : 'none' }} className="animate-fade-in">
+                        <div className="panel p-6 rounded-xl"><div id="artalk-comments" className="w-full"></div></div>
+                    </div>
+                </div>
+            );
+        };
+
+        const AboutPage = ({ selectedArticle, onSelectArticle }) => {
+             const artalkRef = useRef(null);
+             // 动态修改标题
+             useEffect(() => { 
+                 if (selectedArticle) {
+                     document.title = selectedArticle.title + " - " + SITE_CONFIG.siteName;
+                 } else {
+                     document.title = "关于本站 - " + SITE_CONFIG.siteName;
+                 }
+                 return () => { document.title = SITE_CONFIG.siteName; };
+             }, [selectedArticle]);
+
+             useEffect(() => { if (selectedArticle) { const pageKey = '/' + selectedArticle.slug; setTimeout(() => { if (artalkRef.current) artalkRef.current.destroy(); artalkRef.current = Artalk.init({ el: '#artalk-article-comments', pageKey: pageKey, pageTitle: selectedArticle.title, server: SITE_CONFIG.artalkServer, site: SITE_CONFIG.artalkSiteName, darkMode: document.documentElement.classList.contains('dark') }); }, 50); } return () => { if (artalkRef.current) artalkRef.current.destroy(); } }, [selectedArticle]);
+             useEffect(() => { setTimeout(() => { Artalk.loadCountWidget({ server: SITE_CONFIG.artalkServer, site: SITE_CONFIG.artalkSiteName, pvEl: '.artalk-pv-count-article', countEl:'.artalk-comment-count-article', statPageKeyAttr: 'data-page-key' }); }, 100); }, []);
+             return (
+                <div className="animate-fade-in w-full pt-8 px-4">
+                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-gray-800 dark:text-white"><Icon name="book-bookmark" className="text-pink-500" weight="fill" /> 关于本站</h2>
+                    <div className="grid md:grid-cols-4 gap-6">
+                        <div className="md:col-span-1 space-y-2">
+                            {ARTICLES.map(article => (
+                                <div key={article.id} onClick={() => onSelectArticle(article)} className={`p-4 rounded-xl cursor-pointer transition-all border ${selectedArticle?.id === article.id ? 'bg-pink-50 border-pink-500 text-pink-600 dark:bg-pink-600/20 dark:text-pink-300' : 'panel text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800'}`}>
+                                    <div className="text-xs text-gray-400 dark:text-gray-500 mb-1">{article.date}</div>
+                                    <div className="font-bold text-sm line-clamp-1 mb-2">{article.title}</div>
+                                    <div className="flex items-center gap-3 text-[10px] opacity-70">
+                                        <span className="flex items-center gap-1"><Icon name="eye" size={12}/><span data-page-key={'/' + article.slug} className="artalk-pv-count-article">--</span></span>
+                                        <span className="flex items-center gap-1"><Icon name="chat-circle" size={12}/><span data-page-key={'/' + article.slug} className="artalk-comment-count-article">--</span></span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="md:col-span-3 panel rounded-xl p-6 border-gray-200 dark:border-zinc-800 min-h-[500px]">
+                            {selectedArticle ? (
+                                <div className="animate-fade-in">
+                                    <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{selectedArticle.title}</h3>
+                                    <div className="text-xs text-gray-500 mb-6 flex items-center gap-4">
+                                        <span className="flex items-center gap-1"><Icon name="calendar-blank" /> {selectedArticle.date}</span>
+                                        <span className="flex items-center gap-1"><Icon name="user" /> {selectedArticle.author || "Admin"}</span>
+                                        <span className="flex items-center gap-1"><Icon name="eye" size={12}/><span data-page-key={'/' + selectedArticle.slug} className="artalk-pv-count-article">...</span></span>
+                                        <span className="flex items-center gap-1"><Icon name="chat-circle" size={12}/><span data-page-key={'/' + selectedArticle.slug} className="artalk-comment-count-article">...</span></span>
+                                    </div>
+                                    <Markdown content={selectedArticle.content} />
+                                    <div className="mt-8"><div id="artalk-article-comments"></div></div>
+                                </div>
+                            ) : <div className="h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600"><Icon name="book-open" size={48} className="mb-2 opacity-50" /><p>请从左侧选择一篇文章阅读</p></div>}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Hero = ({ onRandom }) => (
+            <div className="mt-8 mb-10 mx-4 md:mx-0 bg-gradient-to-r from-pink-100 to-purple-100 dark:from-zinc-800 dark:to-zinc-900 rounded-2xl p-8 md:p-12 text-gray-800 dark:text-white shadow-2xl relative overflow-hidden border border-pink-200 dark:border-zinc-800">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-200/50 dark:bg-purple-600/10 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-200/50 dark:bg-pink-600/10 rounded-full blur-[80px] -ml-10 -mb-10 pointer-events-none"></div>
+                <div className="relative z-10">
+                    <h2 className="text-3xl md:text-5xl font-bold font-cute mb-4 text-gray-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-pink-400 dark:to-purple-400">{SITE_CONFIG.heroTitle}</h2>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-8 max-w-lg leading-relaxed whitespace-pre-line">{SITE_CONFIG.heroSubtitle}</p>
+                    <button onClick={onRandom} className="bg-pink-600 hover:bg-pink-500 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-pink-600/20 transition-all text-sm flex items-center gap-2"><Icon name="shuffle" weight="bold" /> 随机一个资源</button>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const resolveRoute = (path) => {
+                const cleanPath = path.replace(/^\//, '').replace(new RegExp('\\/$'), '').replace(/^index\.html$/, '');
+                
+                let initialState = { 
+                    view: 'home', 
+                    activeTab: 'home', 
+                    filterMode: 'sfw', 
+                    currentItem: null, 
+                    selectedArticle: null,
+                    title: SITE_CONFIG.siteName
+                };
+                
+                if (cleanPath === '') { 
+                    /* 保持默认 Home */ 
+                } 
+                else if (cleanPath === 'voice') { 
+                    initialState.activeTab = 'voice'; 
+                    initialState.title = "音声资源 - " + SITE_CONFIG.siteName;
+                } 
+                else if (cleanPath === 'gal') { 
+                    initialState.activeTab = 'bonus'; 
+                    initialState.title = "周边资源 - " + SITE_CONFIG.siteName;
+                } 
+                else if (cleanPath === 'about') { 
+                    initialState.view = 'about'; 
+                    initialState.activeTab = 'about'; 
+                    initialState.title = "关于本站 - " + SITE_CONFIG.siteName;
+                } 
+                else {
+                    const item = MOCK_DATA.find(i => i.slug === cleanPath);
+                    if (item) { 
+                        initialState.view = 'detail'; 
+                        initialState.currentItem = item; 
+                        initialState.title = item.title + " - " + SITE_CONFIG.siteName;
+                    } else {
+                        const article = ARTICLES.find(a => a.slug === cleanPath);
+                        if (article) {
+                            initialState.view = 'about';
+                            initialState.activeTab = 'about';
+                            initialState.selectedArticle = article;
+                            initialState.title = article.title + " - " + SITE_CONFIG.siteName;
+                        }
+                    }
+                }
+                return initialState;
+            };
+
+            const initState = useMemo(() => resolveRoute(window.location.pathname), []);
+
+            const [view, setView] = useState(initState.view); 
+            const [activeTab, setActiveTab] = useState(initState.activeTab);
+            const [filterMode, setFilterMode] = useState(initState.filterMode);
+            const [currentItem, setCurrentItem] = useState(initState.currentItem);
+            const [selectedTags, setSelectedTags] = useState([]);
+            const [selectedArticle, setSelectedArticle] = useState(initState.selectedArticle);
+            const [toastMsg, setToastMsg] = useState(null);
+            const [theme, setTheme] = useState('dark');
+
+            useEffect(() => { document.title = initState.title; }, []);
+
+            useEffect(() => {
+                if (window.location.pathname !== '/' && window.location.pathname.endsWith('/')) {
+                    const newPath = window.location.pathname.slice(0, -1);
+                    window.history.replaceState(null, '', newPath + window.location.search);
+                }
+            }, []);
+
+            useEffect(() => { if (theme === 'dark') { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); } }, [theme]);
+            
+            useEffect(() => { 
+                const handlePopState = () => {
+                    const newState = resolveRoute(window.location.pathname);
+                    setView(newState.view);
+                    setActiveTab(newState.activeTab);
+                    setCurrentItem(newState.currentItem);
+                    setSelectedArticle(newState.selectedArticle);
+                    document.title = newState.title;
+                }; 
+                window.addEventListener('popstate', handlePopState); 
+                return () => window.removeEventListener('popstate', handlePopState); 
+            }, []);
+            
+            const navigate = (path) => { 
+                window.history.pushState({}, '', path); 
+                const newState = resolveRoute(path);
+                setView(newState.view);
+                setActiveTab(newState.activeTab);
+                setCurrentItem(newState.currentItem);
+                setSelectedArticle(newState.selectedArticle);
+                document.title = newState.title;
+                window.scrollTo(0, 0); 
+            };
+
+            useEffect(() => { if (view === 'home' || view === 'detail' || view === 'about') { setTimeout(() => { Artalk.loadCountWidget({ server: SITE_CONFIG.artalkServer, site: SITE_CONFIG.artalkSiteName, pvEl: '.artalk-pv-count', countEl:'.artalk-comment-count', statPageKeyAttr: 'data-page-key' }); Artalk.loadCountWidget({ server: SITE_CONFIG.artalkServer, site: SITE_CONFIG.artalkSiteName, pvEl: '.artalk-pv-count-article', countEl:'.artalk-comment-count-article', statPageKeyAttr: 'data-page-key' }); }, 100); } }, [view, activeTab, currentItem, selectedArticle]);
+            
+            const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+            const filteredItems = useMemo(() => {
+                return MOCK_DATA.filter(item => {
+                    if (view === 'home' && activeTab !== 'home' && item.category !== activeTab) return false;
+                    if (filterMode === 'sfw' && item.type === 'nsfw') return false;
+                    if (filterMode === 'nsfw' && item.type === 'sfw') return false;
+                    if (selectedTags.length > 0) { const hasAllTags = selectedTags.every(t => item.tags.includes(t)); if (!hasAllTags) return false; }
+                    return true;
+                });
+            }, [activeTab, filterMode, view, selectedTags]);
+            
+            const availableTags = useMemo(() => {
+                const baseItems = MOCK_DATA.filter(item => { if (view === 'home' && activeTab !== 'home' && item.category !== activeTab) return false; if (filterMode === 'sfw' && item.type === 'nsfw') return false; if (filterMode === 'nsfw' && item.type === 'sfw') return false; return true; });
+                const counts = {}; baseItems.forEach(item => { item.tags.forEach(tag => { counts[tag] = (counts[tag] || 0) + 1; }); });
+                return Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([tag, count]) => ({ tag, count }));
+            }, [activeTab, filterMode, view]);
+            
+            const handleTagToggle = (tag) => { setSelectedTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]); };
+            const handleItemClick = (item) => navigate('/' + item.slug);
+            const handleArticleClick = (article) => navigate('/' + article.slug);
+            const handleRandom = () => { const available = MOCK_DATA.filter(item => { if (filterMode === 'sfw' && item.type === 'nsfw') return false; if (filterMode === 'nsfw' && item.type === 'sfw') return false; return true; }); if (available.length > 0) { handleItemClick(available[Math.floor(Math.random() * available.length)]); } else { alert("当前过滤器模式下没有可用的资源！"); } };
+            const handleTabChange = (tabId) => { setSelectedTags([]); if (tabId === 'about') navigate('/about'); else if (tabId === 'home') navigate('/'); else if (tabId === 'voice') navigate('/voice'); else if (tabId === 'bonus') navigate('/gal'); };
+
+            return (
+                <div className="min-h-screen pb-12">
+                    <Navbar activeTab={activeTab} onChangeTab={handleTabChange} filterMode={filterMode} setFilterMode={setFilterMode} theme={theme} toggleTheme={toggleTheme} />
+                    <div className={"container mx-auto max-w-7xl px-4 md:px-8 " + (view === 'home' && activeTab === 'home' ? 'pt-20' : 'pt-20')}>
+                        {view === 'home' && (
+                            <>
+                                {activeTab === 'home' && <Hero onRandom={handleRandom} />}
+                                <div className="flex flex-col lg:flex-row gap-8">
+                                    <div className="flex-1 order-2 lg:order-1">
+                                        <div className="flex items-center justify-between mb-6 mt-4">
+                                            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2"><Icon name={activeTab === 'home' ? 'fire' : activeTab === 'voice' ? 'microphone-stage' : 'package'} className="text-pink-500" weight="fill" />{activeTab === 'home' ? '最近更新' : activeTab === 'voice' ? '音声资源' : '正作周边资源'}</h3>
+                                            <span className="text-xs text-gray-500 font-medium bg-white dark:bg-zinc-800 px-3 py-1 rounded-full border border-gray-100 dark:border-zinc-700">{filteredItems.length} Items</span>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 animate-fade-in">{filteredItems.map(item => <ItemCard key={item.id} item={item} filterMode={filterMode} onClick={() => handleItemClick(item)} />)}</div>
+                                        {filteredItems.length === 0 && <div className="text-center py-20 bg-gray-50 dark:bg-zinc-800/30 rounded-3xl border border-dashed border-gray-200 dark:border-zinc-700"><p className="text-gray-500">没有找到符合条件的资源...</p></div>}
+                                    </div>
+                                    <div className="w-full lg:w-64 flex-shrink-0 order-1 lg:order-2">
+                                         <div className="sticky top-24 space-y-4">
+                                            <div className="panel p-5 rounded-xl">
+                                                <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100 dark:border-zinc-700">
+                                                    <h4 className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2"><Icon name="tag" weight="fill" className="text-pink-500" />热门标签</h4>
+                                                    {selectedTags.length > 0 && (<button onClick={() => setSelectedTags([])} className="text-[10px] text-pink-500 hover:underline">重置筛选</button>)}
+                                                </div>
+                                                <div className="flex flex-wrap gap-2">{availableTags.map(({ tag, count }) => { const isSelected = selectedTags.includes(tag); return (<button key={tag} onClick={() => handleTagToggle(tag)} className={"text-xs px-3 py-1.5 rounded-lg border transition-all flex items-center gap-1.5 " + (isSelected ? 'bg-pink-50 text-white border-pink-500 shadow-md' : 'bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-zinc-700 hover:border-pink-300 dark:hover:border-zinc-600')}>{tag}<span className={"text-[9px] px-1 rounded-full " + (isSelected ? 'bg-white/20' : 'bg-gray-200 dark:bg-zinc-700')}>{count}</span></button>); })}</div>
+                                            </div>
+                                            {TODOS.length > 0 && (
+                                                <div className="panel p-5 rounded-xl">
+                                                    <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100 dark:border-zinc-700">
+                                                        <h4 className="font-bold text-sm text-gray-700 dark:text-gray-200 flex items-center gap-2"><Icon name="list-checks" className="text-pink-500" weight="fill" /> 待办事项</h4>
+                                                    </div>
+                                                    <ul className="space-y-2">
+                                                        {TODOS.map(t => (
+                                                            <li key={t.id} className="flex items-start gap-2 text-xs">
+                                                                <Icon name={t.done ? "check-square" : "square"} className={t.done ? "text-green-500 mt-0.5" : "text-gray-400 mt-0.5"} weight={t.done ? "fill" : "regular"} />
+                                                                <span className={t.done ? "text-gray-400 line-through decoration-gray-400" : "text-gray-600 dark:text-gray-300"}>{t.text}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                        {view === 'detail' && currentItem && <DetailPage item={currentItem} onBack={() => navigate('/')} filterMode={filterMode} onShowToast={setToastMsg} />}
+                        {view === 'about' && <AboutPage selectedArticle={selectedArticle} onSelectArticle={handleArticleClick} />}
+                    </div>
+                    {toastMsg && <Toast message={toastMsg} onClose={() => setToastMsg(null)} />}
+                </div>
+            );
+        };
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
