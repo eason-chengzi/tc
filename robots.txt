@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# 请将下面的链接替换为你实际生成的 sitemap 地址
-Sitemap: https://072101.xyz/sitemap.xml
